@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { register, reset } from "../features/auth/authSlice";
+import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,9 +15,47 @@ const Register = () => {
 
   const { name, email, password, confirmPassword } = formData;
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate;
+
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (user || isSuccess) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isSuccess, isError, message]);
+
   const onChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  const onSubmit = () => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+    }
+
+    const userData = {
+      name,
+      email,
+      password,
+    };
+
+    dispatch(register(userData));
+  };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   console.log(formData);
 
@@ -83,6 +126,7 @@ const Register = () => {
                 name="password"
                 value={password}
                 onChange={onChange}
+                autoComplete="on"
               />
             </div>
 
@@ -99,12 +143,13 @@ const Register = () => {
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={onChange}
+                autoComplete="on"
               />
             </div>
             <div>
-              {/* <button className="btn-submit mt-2" onClick={handleSubmit}>
+              <button onClick={onSubmit} className="btn-submit mt-2">
                 Register
-              </button> */}
+              </button>
             </div>
           </form>
         </div>
@@ -113,10 +158,3 @@ const Register = () => {
   );
 };
 export default Register;
-
-{
-  /* <img
-            src="https://source.unsplash.com/kUqqaRjJuw0"
-            className="object-cover"
-          /> */
-}
