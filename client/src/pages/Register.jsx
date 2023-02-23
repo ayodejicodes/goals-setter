@@ -1,4 +1,26 @@
+import { useEffect, useState } from "react";
+
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const { name, email, password, confirmPassword } = formData;
+
+  const onChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  console.log(formData);
+
+  // const handleSubmit = () => {
+  //   e.preventDefault();
+  //   console.log(formData);
+  // };
+
   return (
     <div className="global-container text-xl ">
       <h1 className="text-center font-semibold m-12">
@@ -15,36 +37,42 @@ const Register = () => {
           />
 
           {/* right */}
-          <div className="flex-1 p-7 flex flex-col gap-4">
+          <form className="flex-1 p-7 flex flex-col gap-4">
             {/* Name */}
             <div>
-              <label for="name" className="text-lg ">
+              <label htmlFor="name" className="text-lg ">
                 Name
               </label>
               <input
                 type="text"
                 id="name"
                 placeholder="Please enter your name"
-                className=" placeholder-style input-style  "
+                className=" placeholder-style input-style"
+                name="name"
+                value={name}
+                onChange={onChange}
               />
             </div>
 
             {/* Email */}
             <div>
-              <label for="email" className="text-lg ">
+              <label htmlFor="email" className="text-lg ">
                 Email
               </label>
               <input
                 type="email"
                 placeholder="Please enter your email"
-                id="name"
+                id="email"
                 className="placeholder-style input-style "
+                name="email"
+                value={email}
+                onChange={onChange}
               />
             </div>
 
             {/* Password */}
             <div>
-              <label for="password" className="text-lg ">
+              <label htmlFor="password" className="text-lg ">
                 Password
               </label>
               <input
@@ -52,12 +80,15 @@ const Register = () => {
                 placeholder="Please enter a passowrd"
                 id="password"
                 className="placeholder-style input-style "
+                name="password"
+                value={password}
+                onChange={onChange}
               />
             </div>
 
             {/* Confirm Password */}
             <div>
-              <label for="confirmPassword" className="text-lg ">
+              <label htmlFor="confirmPassword" className="text-lg ">
                 Confirm Password
               </label>
               <input
@@ -65,12 +96,17 @@ const Register = () => {
                 id="confirmPassword"
                 placeholder="Confirm Password"
                 className="placeholder-style input-style "
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={onChange}
               />
             </div>
             <div>
-              <button className="btn-submit mt-2">Register</button>
+              {/* <button className="btn-submit mt-2" onClick={handleSubmit}>
+                Register
+              </button> */}
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
