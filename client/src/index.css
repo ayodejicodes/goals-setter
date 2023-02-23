@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.global-container {
+  @apply mx-32;
+}
+.btn-primary {
+  @apply bg-primary text-light rounded-full px-5 py-2;
+}
+
+.btn-submit {
+  @apply bg-primary text-light rounded-lg px-5 py-2;
+}
+
+.placeholder-style {
+  @apply placeholder-primary placeholder-opacity-40 p-2 text-sm;
+}
+
+.input-style {
+  @apply border border-primaryLight w-full mt-2;
+}
