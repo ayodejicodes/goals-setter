@@ -1,27 +1,86 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login, reset } from "../features/auth/authSlice";
+import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
+
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { name, email, password } = formData;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate;
+
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (user || isSuccess) {
+      navigate("/dashboard");
+    }
+
+    dispatch(reset());
+  }, [user, isSuccess, isError, message]);
+
+  const onChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const onSubmit = () => {
+    e.preventDefault();
+
+    const userData = {
+      name,
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
+  };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  console.log(formData);
+
   return (
     <div className="global-container text-xl ">
       <h1 className="text-center font-semibold m-12">Please Login</h1>
 
       <div className="flex justify-center items-center">
-        <div className="  border-2 rounded-lg  ">
-          <div className="p-7 flex flex-col gap-4">
+        <div className=" flex border-2 rounded-lg  ">
+          {/* right */}
+          <form onSubmit={onSubmit} className="flex-1 p-7 flex flex-col gap-4">
             {/* Email */}
             <div>
-              <label for="email" className="text-lg ">
+              <label htmlFor="email" className="text-lg ">
                 Email
               </label>
               <input
                 type="email"
                 placeholder="Please enter your email"
-                id="name"
+                id="email"
                 className="placeholder-style input-style "
+                name="email"
+                value={email}
+                onChange={onChange}
               />
             </div>
 
             {/* Password */}
             <div>
-              <label for="password" className="text-lg ">
+              <label htmlFor="password" className="text-lg ">
                 Password
               </label>
               <input
@@ -29,12 +88,19 @@ const Login = () => {
                 placeholder="Please enter a passowrd"
                 id="password"
                 className="placeholder-style input-style "
+                name="password"
+                value={password}
+                onChange={onChange}
+                autoComplete="on"
               />
             </div>
 
-            <button className="btn-submit mt-2">Login</button>
-            <div></div>
-          </div>
+            <div>
+              <button type="submit" className="btn-submit mt-2">
+                Login
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ const Register = () => {
       toast.error(message);
     }
 
-    if (user || isSuccess) {
+    if (isSuccess || user) {
       navigate("/");
     }
 
@@ -80,7 +80,7 @@ const Register = () => {
           />
 
           {/* right */}
-          <form className="flex-1 p-7 flex flex-col gap-4">
+          <form onSubmit={onSubmit} className="flex-1 p-7 flex flex-col gap-4">
             {/* Name */}
             <div>
               <label htmlFor="name" className="text-lg ">
@@ -147,7 +147,7 @@ const Register = () => {
               />
             </div>
             <div>
-              <button onClick={onSubmit} className="btn-submit mt-2">
+              <button type="submit" className="btn-submit mt-2">
                 Register
               </button>
             </div>
