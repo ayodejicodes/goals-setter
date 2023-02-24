@@ -28,40 +28,45 @@ const NavBar = () => {
         {/* Right */}
         <div className="flex gap-8">
           <ul className="flex gap-x-8 items-center ">
-            <li className=" font-semibold text-primary">
-              <NavLink
-                className={({ isActive }) => {
-                  return isActive ? activeClassName : undefined;
-                }}
-                to="/"
-              >
-                Home
-              </NavLink>
-            </li>
-            <li className=" font-semibold text-primary">
-              <NavLink
-                className={({ isActive }) => {
-                  return isActive ? activeClassName : undefined;
-                }}
-                to="/register"
-              >
-                Register
-              </NavLink>
-            </li>
-            <li className=" font-semibold text-primary">
-              <NavLink
-                className={({ isActive }) => {
-                  return isActive ? activeClassName : undefined;
-                }}
-                to="/login"
-              >
-                Login
-              </NavLink>
-            </li>
+            {user ? (
+              <button onClick={onLogout} className="btn-primary items-center ">
+                Logout
+              </button>
+            ) : (
+              <>
+                <li className=" font-semibold text-primary">
+                  <NavLink
+                    className={({ isActive }) => {
+                      return isActive ? activeClassName : undefined;
+                    }}
+                    to="/"
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li className=" font-semibold text-primary">
+                  <NavLink
+                    className={({ isActive }) => {
+                      return isActive ? activeClassName : undefined;
+                    }}
+                    to="/register"
+                  >
+                    Register
+                  </NavLink>
+                </li>
+                <li className=" font-semibold text-primary">
+                  <NavLink
+                    className={({ isActive }) => {
+                      return isActive ? activeClassName : undefined;
+                    }}
+                    to="/login"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
-          <button onClick={onLogout} className="btn-primary items-center ">
-            Logout
-          </button>
         </div>
       </div>
     </div>

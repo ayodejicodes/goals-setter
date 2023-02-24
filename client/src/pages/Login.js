@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { login, reset, logout } from "../features/auth/authSlice";
+import Spinner from "../components/Spinner";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -6,20 +11,52 @@ const Login = () => {
     password: "",
   });
 
-  const { name, email, password } = formData;
+  const { email, password } = formData;
 
   const onChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
   console.log(formData);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess || user) {
+      navigate("/dashboard");
+    }
+    dispatch(reset());
+  }, [user, isLoading, isSuccess, isError, message, navigate, dispatch]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
+  };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="global-container text-xl ">
       <h1 className="text-center font-semibold m-12">Please Login</h1>
 
       <div className="flex justify-center items-center">
         <div className=" flex border-2 rounded-lg  ">
-          {/* right */}
-          <form className="flex-1 p-7 flex flex-col gap-4">
+          <form onSubmit={onSubmit} className="flex-1 p-7 flex flex-col gap-4">
             {/* Email */}
             <div>
               <label htmlFor="email" className="text-lg ">
@@ -55,7 +92,7 @@ const Login = () => {
 
             <div>
               <button type="submit" className="btn-submit mt-2">
-                Login
+                login
               </button>
             </div>
           </form>
