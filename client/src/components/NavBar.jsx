@@ -1,7 +1,21 @@
-import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { logout, reset } from "../features/auth/authSlice";
 
 const NavBar = () => {
   let activeClassName = "font-bold";
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  const onLogout = (e) => {
+    e.preventDefault();
+
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
+  };
 
   return (
     <div className="   bg-secondary ">
@@ -45,7 +59,9 @@ const NavBar = () => {
               </NavLink>
             </li>
           </ul>
-          {/* <button className="btn-primary items-center ">Logout</button> */}
+          <button onClick={onLogout} className="btn-primary items-center ">
+            Logout
+          </button>
         </div>
       </div>
     </div>
