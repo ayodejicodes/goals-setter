@@ -51,16 +51,16 @@ const updateGoalController = asyncHandler(async (req, res) => {
     throw new Error("Goal not found");
   }
 
-  const user = await UserModel.findById(req.user.id);
+  // const user = await UserModel.findById(req.user.id);
 
   // Check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
   // Make sure authenticated user matches goal user
-  if (user.id !== foundGoal.userID.toString()) {
+  if (req.user.id !== foundGoal.userID.toString()) {
     res.status(401);
     throw new Error("User not Authorized");
   }
@@ -101,7 +101,7 @@ const deleteGoalController = asyncHandler(async (req, res) => {
   }
 
   const deletedGoal = await GoalModel.findByIdAndDelete(req.params.id);
-  res.status(200).json(`Goal with id:${deletedGoal._id} has been deleted`);
+  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {

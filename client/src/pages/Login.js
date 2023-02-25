@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { login, reset, logout } from "../features/auth/authSlice";
+import { login, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 const Login = () => {
@@ -17,7 +17,7 @@ const Login = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  console.log(formData);
+  // console.log(formData);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -92,7 +92,7 @@ const Login = () => {
 
             <div>
               <button type="submit" className="btn-submit mt-2">
-                login
+                Login
               </button>
             </div>
           </form>

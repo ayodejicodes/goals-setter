@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { register, reset, logout } from "../features/auth/authSlice";
+import { register, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 const Register = () => {
@@ -19,7 +19,7 @@ const Register = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  console.log(formData);
+  // console.log(formData);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,15 +42,15 @@ const Register = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      };
+
+      dispatch(register(userData));
     }
-
-    const userData = {
-      name,
-      email,
-      password,
-    };
-
-    dispatch(register(userData));
   };
 
   if (isLoading) {
@@ -69,6 +69,7 @@ const Register = () => {
           <img
             src="https://source.unsplash.com/kUqqaRjJuw0"
             className="object-cover h-100 w-96 rounded-xl flex-1 "
+            alt=""
           />
 
           {/* right */}

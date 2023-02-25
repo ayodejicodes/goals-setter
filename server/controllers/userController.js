@@ -80,20 +80,22 @@ const logInUser = asyncHandler(async (req, res) => {
 // route        GET /api/users/me
 // access       Private
 const getMe = asyncHandler(async (req, res) => {
-  const user = await UserModel.findById(req.user.id);
+  // const user = await UserModel.findById(req.user.id);
 
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
-  const { _id, name, email } = user;
+  // const { _id, name, email } = user;
 
-  res.status(200).json({
-    id: _id,
-    name,
-    email,
-  });
+  // res.status(200).json({
+  //   id: _id,
+  //   name,
+  //   email,
+  // });
+
+  res.status(200).json(req.user);
 });
 
 const generateToken = (id) => {

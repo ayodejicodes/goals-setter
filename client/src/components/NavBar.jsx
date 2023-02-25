@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { logout, reset } from "../features/auth/authSlice";
+import { BsCaretRightFill } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
+import { AiFillHome } from "react-icons/ai";
 
 const NavBar = () => {
   let activeClassName = "font-bold";
@@ -34,7 +37,8 @@ const NavBar = () => {
               </button>
             ) : (
               <>
-                <li className=" font-semibold text-primary">
+                <li className=" font-semibold text-primary flex items-center gap-3">
+                  <AiFillHome size={15} />
                   <NavLink
                     className={({ isActive }) => {
                       return isActive ? activeClassName : undefined;
@@ -44,7 +48,8 @@ const NavBar = () => {
                     Home
                   </NavLink>
                 </li>
-                <li className=" font-semibold text-primary">
+                <li className=" font-semibold text-primary flex items-center gap-3">
+                  <FaUser size={15} />
                   <NavLink
                     className={({ isActive }) => {
                       return isActive ? activeClassName : undefined;
@@ -54,7 +59,8 @@ const NavBar = () => {
                     Register
                   </NavLink>
                 </li>
-                <li className=" font-semibold text-primary">
+                <li className=" font-semibold text-primary flex items-center gap-3">
+                  <BsCaretRightFill size={15} />
                   <NavLink
                     className={({ isActive }) => {
                       return isActive ? activeClassName : undefined;
