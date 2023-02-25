@@ -11,7 +11,7 @@ const GoalItem = ({ goal }) => {
         <p className="text-primary">
           {new Date(goal.createdAt).toLocaleString("en-US")}
         </p>
-        <h1 className="text-primary">{goal.text}</h1>
+        <h1 className="text-primary font-bold">{goal.text}</h1>
       </div>
       <div className="relative ">
         <RxCross2
