@@ -15,7 +15,11 @@ app.use(express.json());
 // handles form data
 app.use(express.urlencoded({ extended: false }));
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://goals-setter-5eup.onrender.com"],
+  })
+);
 
 // ROUTES
 app.use("/api/goals", require("./routes/goalRoutes"));
