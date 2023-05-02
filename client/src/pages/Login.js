@@ -60,6 +60,10 @@ const Login = () => {
             onSubmit={onSubmit}
             className="flex-1 p-7 flex flex-col gap-4 w-[45vw]"
           >
+            <p className="text-sm">
+              Login as guest using email: guest@g.co, password: guest
+            </p>
+
             {/* Email */}
             <div>
               <label htmlFor="email" className="text-lg ">
@@ -92,10 +96,6 @@ const Login = () => {
                 autoComplete="on"
               />
             </div>
-
-            <p className="text-sm">
-              Login as guest using email: guest@g.co, password: guest
-            </p>
 
             <div>
               <button type="submit" className="btn-submit mt-2">
