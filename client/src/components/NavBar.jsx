@@ -21,35 +21,38 @@ const NavBar = () => {
   };
 
   return (
-    <div className="   bg-secondary ">
+    <div className="    bg-secondary ">
       <div className="global-container flex justify-between items-center py-8">
         {/* Left */}
-        <div className="font-bold text-xl text-primary">
+        <div className="font-bold text-sm lg:text-xl text-primary">
           <Link to="/">Goals Setter</Link>
         </div>
 
         {/* Right */}
-        <div className="flex gap-8">
-          <ul className="flex gap-x-8 items-center ">
+        <div className="flex  gap-8">
+          <ul className="flex flex-col lg:flex-row gap-x-3 items-center ">
             {user ? (
-              <button onClick={onLogout} className="btn-primary items-center ">
+              <button
+                onClick={onLogout}
+                className="bg-primary text-light rounded-full px-3 lg:px-5 lg:py-2 py-1 text-sm items-center "
+              >
                 Logout
               </button>
             ) : (
               <>
-                <li className=" font-semibold text-primary flex items-center gap-3">
-                  <AiFillHome size={15} />
+                <li className=" font-semibold text-primary text-[12px] lg:text-sm flex items-center gap-1">
+                  <AiFillHome size={13} className="hidden lg:block" />
                   <NavLink
                     className={({ isActive }) => {
                       return isActive ? activeClassName : undefined;
                     }}
-                    to="/"
+                    to="/home"
                   >
                     Home
                   </NavLink>
                 </li>
-                <li className=" font-semibold text-primary flex items-center gap-3">
-                  <FaUser size={15} />
+                <li className=" font-semibold text-primary text-[12px] lg:text-sm flex items-center gap-1">
+                  <FaUser size={13} className="hidden lg:block" />
                   <NavLink
                     className={({ isActive }) => {
                       return isActive ? activeClassName : undefined;
@@ -59,13 +62,13 @@ const NavBar = () => {
                     Register
                   </NavLink>
                 </li>
-                <li className=" font-semibold text-primary flex items-center gap-3">
-                  <BsCaretRightFill size={15} />
+                <li className=" font-semibold text-primary text-[12px] lg:text-sm flex items-center gap-1">
+                  <BsCaretRightFill size={13} className="hidden lg:block" />
                   <NavLink
                     className={({ isActive }) => {
                       return isActive ? activeClassName : undefined;
                     }}
-                    to="/login"
+                    to="/"
                   >
                     Login
                   </NavLink>

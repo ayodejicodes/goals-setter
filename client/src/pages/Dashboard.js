@@ -33,10 +33,10 @@ const Dashboard = () => {
   isLoading && <Spinner />;
 
   return (
-    <div className="global-container   ">
+    <div className="global-container flex flex-col items-center  ">
       <section className="text-center flex flex-col justify-center items-center h-[25vh] gap-5">
-        <h1 className="font-bold text-[2.5rem] text-primary">
-          Welcome {user.name}
+        <h1 className="font-bold text-[1.5rem] lg:text-[2.5rem] text-primary">
+          Welcome, {user?.name}
         </h1>
         <p className="text-primary text-lg ">Goals Dashboard</p>
       </section>

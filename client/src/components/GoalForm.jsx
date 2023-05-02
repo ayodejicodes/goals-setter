@@ -20,15 +20,15 @@ const GoalForm = () => {
     // console.log(text);
   };
   return (
-    <div>
-      <section className="flex justify-center">
+    <div className="text-center w-64">
+      <section className="flex justify-center  ">
         <form onSubmit={onSubmit} className=" text-center w-[30rem] ">
           <div className="flex flex-col ">
             <label htmlFor="goal" className="mb-4">
               Enter your Goal
             </label>
             <input
-              className="placeholder-style input-style"
+              className="placeholder-style input-style "
               id="goal"
               name="goal"
               placeholder="Start typing..."
@@ -42,9 +42,9 @@ const GoalForm = () => {
         </form>
       </section>
       <section className="border mx-32 mt-10 ">
-        <div className=" flex justify-center  ">
+        <div className=" flex justify-center   ">
           <div>
-            <div className="flex gap-5">
+            <div className="flex flex-col lg:flex-row gap-5">
               {goals.length > 0 ? (
                 goals.map((goal) => {
                   return <GoalItem key={goal._id} goal={goal} />;

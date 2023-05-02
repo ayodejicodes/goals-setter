@@ -68,12 +68,15 @@ const Register = () => {
 
           <img
             src="https://source.unsplash.com/kUqqaRjJuw0"
-            className="object-cover h-100 w-96 rounded-xl flex-1 "
+            className="hidden lg:block object-cover h-100 w-96 rounded-xl flex-1 "
             alt=""
           />
 
           {/* right */}
-          <form onSubmit={onSubmit} className="flex-1 p-7 flex flex-col gap-4">
+          <form
+            onSubmit={onSubmit}
+            className="flex-1 p-7 flex flex-col gap-4 w-[45vw]"
+          >
             {/* Name */}
             <div>
               <label htmlFor="name" className="text-lg ">

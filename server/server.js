@@ -24,3 +24,5 @@ app.use(errorHandlerMiddleware);
 app.listen(port, () => {
   console.log(`Server is running on ${port}`.blue);
 });
+
+console.log("Port", process.env.PORT);
