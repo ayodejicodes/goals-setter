@@ -3,6 +3,7 @@ const color = require("colors");
 require("dotenv").config();
 const connectDB = require("./config/db");
 const errorHandlerMiddleware = require("./middlewares/errorHandlerMiddleware");
+const cors = require("cors");
 
 const port = process.env.PORT || 7000;
 const app = express();
@@ -13,6 +14,8 @@ connectDB();
 app.use(express.json());
 // handles form data
 app.use(express.urlencoded({ extended: false }));
+
+app.use(cors());
 
 // ROUTES
 app.use("/api/goals", require("./routes/goalRoutes"));
